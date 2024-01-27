@@ -1,0 +1,4 @@
+SaladIngredients.destroy_all
+Salad.destroy_all
+Ingredient.destroy_all
+Order.destroy_all
