@@ -16,7 +16,21 @@ class SaladsController < ApplicationController
   end
 
   def create
-    salad = Salad.create!(name: params[:name])
-    render json: salad
+    if params[:name].blank? || params[:ingredients].blank?
+      render json: { error: "Name and ingredients cannot be blank" }, status: 422
+      return
+    end
+
+    ActiveRecord::Base.transaction do
+      salad = Salad.create!(name: params[:name])
+      params[:ingredients].each do |ingredient|
+        salad.salad_ingredients.create!(ingredient_id: ingredient[:id], quantity: ingredient[:quantity])
+      end
+    end
+
+    render json: { success: true }, status: 200
+  rescue StandardError => e
+    render json: { error: e.message }, status: 422
   end
+
 end

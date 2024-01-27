@@ -8,7 +8,8 @@ export interface SelectOption {
 export default function Select(props: {
     placeholder: string,
     options?: SelectOption[],
-    selected?: string
+    selected?: string,
+    name?: string
 }) {
     let selectOptions = {
         placeholder: props.placeholder || "Select",
@@ -22,7 +23,7 @@ export default function Select(props: {
     return (
         <>
             <div className="relative w-full">
-                <select data-hs-select={JSON.stringify(selectOptions)}>
+                <select data-hs-select={JSON.stringify(selectOptions)} name={props.name}>
                     <option value="">Choose</option>
                     {
                         props.options?.map((option, index) => {

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import Select, {SelectOption} from "../common/select";
-import {Api} from "../common/api";
+import {Api, CreateSaladRequest} from "../common/api";
+import Ingredient from "../../models/ingredient";
 
 export default function NewSalad(props: {}) {
 
@@ -21,6 +22,41 @@ export default function NewSalad(props: {}) {
         setSelectOptions
     ]);
 
+    function ingredientInput(index) {
+        let ingredientName = `ingredients[${index}][id]`;
+        let ingredientQty = `ingredients[${index}][qty]`;
+        return (
+            <div className="flex flex-row sm:inline-flex sm:items-center space-y-2 sm:space-y-0 sm:space-x-1">
+                <Select name={ingredientName} placeholder={"Select ingredient.."} options={selectOptions} />
+                <input name={ingredientQty} type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="qty.." aria-describedby="hs-inline-input-helper-text"/>
+            </div>
+        )
+    }
+
+    async function createSalad(event) {
+        event.preventDefault();
+        let data = new FormData(event.target);
+        let createSaladRequest = new CreateSaladRequest(data.get("name").toString(), [])
+        for (let i = 0; i < 5; i++) {
+            let ingredientId = data.get(`ingredients[${i}][id]`);
+            let ingredientQty = data.get(`ingredients[${i}][qty]`);
+            if (ingredientId && ingredientQty) {
+                createSaladRequest.ingredients.push(new Ingredient(parseInt(ingredientId.toString()), "", parseInt(ingredientQty.toString()), ""));
+            }
+        }
+
+        await Api.createSalad(createSaladRequest).then((response) => {
+            if (response.error) {
+                alert(response.error);
+                return;
+            }
+
+            alert("Salad created!");
+
+            window.location.reload();
+        });
+    }
+
     return (
         <>
             <button data-hs-overlay="#new-salad" type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
@@ -39,41 +75,25 @@ export default function NewSalad(props: {}) {
                     </button>
                 </div>
                 <div className="p-4">
-                    <form className={"flex flex-col gap-2"}>
+                    <form className={"flex flex-col gap-2"} onSubmit={createSalad}>
+                        <input type="hidden" name="authenticity_token" value={document.querySelector('meta[name="csrf-token"]').getAttribute('content')} />
                         <div className="flex flex-col space-y-2 sm:space-y-0 sm:space-x-3 w-full">
                             <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Salad Name:</label>
-                            <input type="email" id="inline-input-label-with-helper-text" style={{marginLeft: 0}} className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Salad name.." aria-describedby="hs-inline-input-helper-text"/>
+                            <input type="text" name="name" id="inline-input-label-with-helper-text" style={{marginLeft: 0}} className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Salad name.." aria-describedby="hs-inline-input-helper-text"/>
                         </div>
 
                         <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Items:</label>
-
-                        <div className="flex flex-row sm:inline-flex sm:items-center space-y-2 sm:space-y-0 sm:space-x-1">
-                            <Select placeholder={"Select ingredient.."} options={selectOptions} />
-                            <input type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="qty.." aria-describedby="hs-inline-input-helper-text"/>
-                        </div>
-
-                        <div className="flex flex-row sm:inline-flex sm:items-center space-y-2 sm:space-y-0 sm:space-x-1">
-                            <Select placeholder={"Select ingredient.."} options={selectOptions} />
-                            <input type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="qty.." aria-describedby="hs-inline-input-helper-text"/>
-                        </div>
-
-                        <div className="flex flex-row sm:inline-flex sm:items-center space-y-2 sm:space-y-0 sm:space-x-1">
-                            <Select placeholder={"Select ingredient.."} options={selectOptions} />
-                            <input type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="qty.." aria-describedby="hs-inline-input-helper-text"/>
-                        </div>
-
-                        <div className="flex flex-row sm:inline-flex sm:items-center space-y-2 sm:space-y-0 sm:space-x-1">
-                            <Select placeholder={"Select ingredient.."} options={selectOptions} />
-                            <input type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="qty.." aria-describedby="hs-inline-input-helper-text"/>
-                        </div>
-
-                        <div className="flex flex-row sm:inline-flex sm:items-center space-y-2 sm:space-y-0 sm:space-x-1">
-                            <Select placeholder={"Select ingredient.."} options={selectOptions} />
-                            <input type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="qty.." aria-describedby="hs-inline-input-helper-text"/>
-                        </div>
-
+                        {
+                            [0, 1, 2, 3, 4].map((index) => {
+                                return (
+                                    <div key={index} className="flex flex-col space-y-2 sm:space-y-0 sm:space-x-3 w-full">
+                                        {ingredientInput(index)}
+                                    </div>
+                                )
+                            })
+                        }
                         <div className="flex justify-end sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
-                            <button type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                            <button type="submit" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                 Create
                             </button>
                         </div>

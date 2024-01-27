@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   scope :api do
     get "ingredients", to: "ingredients#list_ingredients"
+    post "salads", to: "salads#create"
   end
 end

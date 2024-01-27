@@ -10,13 +10,11 @@ export class CreateSaladRequest {
 
 export class Api {
 
-    static getIngredients(): Promise<Ingredient[]> {
-        return fetch('/api/ingredients').then((response) => {
-            return response.json();
-        }).then((data) => {
-            return data.ingredients.map((ingredient: any) => {
-                return new Ingredient(ingredient.id, ingredient.name, ingredient.quantity, ingredient.price);
-            });
+    static async getIngredients(): Promise<Ingredient[]> {
+        const response = await fetch('/api/ingredients');
+        const data = await response.json();
+        return data.ingredients.map((ingredient: any) => {
+            return new Ingredient(ingredient.id, ingredient.name, ingredient.quantity, ingredient.price);
         });
     }
 
@@ -25,18 +23,19 @@ export class Api {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
             },
             body: JSON.stringify({
-                salad: {
-                    name: saladRequest.name,
-                    ingredients: saladRequest.ingredients.map((ingredient: Ingredient) => {
-                        return {
-                            id: ingredient.id,
-                            quantity: ingredient.quantity,
-                        };
-                    }),
-                },
+                name: saladRequest.name,
+                ingredients: saladRequest.ingredients.map((ingredient: Ingredient) => {
+                    return {
+                        id: ingredient.id,
+                        quantity: ingredient.quantity,
+                    };
+                }),
             }),
+        }).then((response) => {
+            return response.json();
         });
     }
 }
