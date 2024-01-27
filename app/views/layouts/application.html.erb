@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      <%= yield :title %>
+    </title>
+    <link rel="icon" type="image/x-icon" href="https://www.favicon.cc/logo3d/670193.png">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag "styles" %>
+    <%= javascript_pack_tag "application" %>
+  </head>
+  <body>
+  <div class="flex flex-col gap-5">
+    <div class="header">
+      <%= react_component("layout/Navbar", @props) %>
+    </div>
+    <div>
+      <%= yield %>
+    </div>
+    <div class="footer">
+      <%= react_component("layout/Footer", @props) %>
+    </div>
+  </div>
+  </body>
+</html>
