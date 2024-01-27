@@ -5,11 +5,11 @@ class CreateOrder
   end
 
   def execute
-    salad_ingredients = @salad.salad_ingredients.sum(:quantity)
-    ingredients_in_stock = @salad.ingredients.sum(:quantity)
-
-    if ingredients_in_stock < salad_ingredients
-      raise "Not enough ingredients"
+    @salad.salad_ingredients.each do |salad_ingredient|
+      ingredient = salad_ingredient.ingredient
+      if ingredient.quantity < salad_ingredient.quantity
+        raise "Not enough ingredients"
+      end
     end
 
     ActiveRecord::Base.transaction do
