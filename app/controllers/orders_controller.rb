@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
 
     def index
       @data.merge!({
-        orders: Order.all
+        orders: Order.all.map(&:serializable_hash)
       })
     end
 

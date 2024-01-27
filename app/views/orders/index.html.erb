@@ -1,0 +1,5 @@
+<% content_for :title do %>
+  <%= @data[:title] %>
+<% end %>
+
+<%= react_component("orders/index", @data) %>

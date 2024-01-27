@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :salads, only: [:index, :create]
   resources :ingredients, only: [:index, :create, :update]
-  resources :orders, only: [:index, :create]
+  resources :orders, only: [:index]
 
   scope :api do
     post "salads", to: "salads#create"
@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     post "ingredients", to: "ingredients#create"
     put "ingredients/:id", to: "ingredients#update"
     get "ingredients/list", to: "ingredients#list_options"
+
+    post "orders", to: "orders#create"
   end
 end
