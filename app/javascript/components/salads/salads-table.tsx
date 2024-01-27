@@ -1,5 +1,6 @@
 import React from "react"
 import Salad from "../../models/salad";
+import {Api} from "../common/api";
 
 type TableProps = {
     salads: Salad[]
@@ -7,6 +8,20 @@ type TableProps = {
 }
 
 export default function SaladsTable(props: TableProps) {
+
+    async function sellSalad(salad: Salad) {
+        await Api.createOrder(salad).then((response) => {
+            if (response.error) {
+                alert(response.error);
+                return;
+            }
+
+            alert("Salad sold!");
+
+            window.location.reload();
+        });
+    }
+
     return (
         <>
             <div className="flex flex-col">
@@ -39,7 +54,9 @@ export default function SaladsTable(props: TableProps) {
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{salad.name}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{salad.priceInDollars}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                        <button type="button" className="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                                        <button type="button" onClick={() => {
+                                                            sellSalad(salad)
+                                                        }} className="py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                                                             Sell
                                                         </button>
                                                     </td>

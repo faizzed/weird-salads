@@ -1,4 +1,5 @@
 import Ingredient from "../../models/ingredient";
+import Salad from "../../models/salad";
 
 export class CreateSaladRequest {
     constructor(
@@ -60,6 +61,38 @@ export class Api {
                 name: request.name,
                 quantity: request.quantity,
                 price: request.price,
+            }),
+        }).then((response) => {
+            return response.json();
+        });
+    }
+
+    static async updateIngredient(ingredient: Ingredient): Promise<any> {
+        return fetch('/api/ingredients/' + ingredient.id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+            },
+            body: JSON.stringify({
+                name: ingredient.name,
+                quantity: ingredient.quantity,
+                price: ingredient.price,
+            }),
+        }).then((response) => {
+            return response.json();
+        });
+    }
+
+    static async createOrder(salad: Salad): Promise<any> {
+        return fetch('/api/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+            },
+            body: JSON.stringify({
+                salad
             }),
         }).then((response) => {
             return response.json();

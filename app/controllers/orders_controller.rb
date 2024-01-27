@@ -15,10 +15,10 @@ class OrdersController < ApplicationController
     end
 
     def create
-      CreateOrder.new(salad: Salad.find(params[:salad_id])).execute!
+      CreateOrder.new(salad: Salad.find(params[:salad][:id])).execute
 
       render json: { message: "Order created" }
-    rescue
-      render json: { error: "Not enough ingredients" }, status: 422
+    rescue StandardError => e
+      render json: { error: e.message }, status: 422
     end
 end

@@ -1,0 +1,1 @@
+Ingredient.update_all(quantity: 1000)
