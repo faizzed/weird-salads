@@ -1,17 +1,14 @@
 import React, {useEffect} from 'react'
 import Select, {SelectOption} from "../common/select";
-import Ingredient from "../../models/ingredient";
 import {Api} from "../common/api";
 
 export default function NewSalad(props: {}) {
 
-    let [ingredients, setIngredients] = React.useState<Ingredient[]>([]);
     let [selectOptions, setSelectOptions] = React.useState<SelectOption[]>([]);
 
     useEffect(() => {
         (async () => {
             let ingredients = await Api.getIngredients();
-            setIngredients(ingredients);
             setSelectOptions(ingredients.map((ingredient) => {
                 return {
                     id: ingredient.id,
@@ -21,7 +18,6 @@ export default function NewSalad(props: {}) {
 
         })();
     }, [
-        setIngredients,
         setSelectOptions
     ]);
 
