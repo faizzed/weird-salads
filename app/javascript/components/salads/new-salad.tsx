@@ -6,6 +6,7 @@ import Ingredient from "../../models/ingredient";
 export default function NewSalad(props: {}) {
 
     let [selectOptions, setSelectOptions] = React.useState<SelectOption[]>([]);
+    let [loading, setLoading] = React.useState<boolean>(true);
 
     useEffect(() => {
         (async () => {
@@ -17,21 +18,11 @@ export default function NewSalad(props: {}) {
                 }
             }));
 
+            setLoading(false);
         })();
     }, [
         setSelectOptions
     ]);
-
-    function ingredientInput(index) {
-        let ingredientName = `ingredients[${index}][id]`;
-        let ingredientQty = `ingredients[${index}][qty]`;
-        return (
-            <div className="flex flex-row sm:inline-flex sm:items-center space-y-2 sm:space-y-0 sm:space-x-1">
-                <Select name={ingredientName} placeholder={"Select ingredient.."} options={selectOptions} />
-                <input name={ingredientQty} type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="qty.." aria-describedby="hs-inline-input-helper-text"/>
-            </div>
-        )
-    }
 
     async function createSalad(event) {
         event.preventDefault();
@@ -57,6 +48,48 @@ export default function NewSalad(props: {}) {
         });
     }
 
+    let loadingIndicator = (
+        <div className="flex justify-center items-center">
+            <svg className="animate-spin w-6 h-6 text-gray-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8v2a6 6 0 0 0-6 6z"></path></svg>
+        </div>
+    )
+
+    let form = (
+        <form className={"flex flex-col gap-2"} onSubmit={createSalad}>
+            <div className="flex flex-col space-y-2 sm:space-y-0 sm:space-x-3 w-full">
+                <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Salad Name:</label>
+                <input type="text" name="name" id="inline-input-label-with-helper-text" style={{marginLeft: 0}} className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Salad name.." aria-describedby="hs-inline-input-helper-text"/>
+            </div>
+
+            <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Items:</label>
+            {
+                [0, 1, 2, 3, 4].map((index) => {
+                    return (
+                        <div key={index} className="flex flex-col space-y-2 sm:space-y-0 sm:space-x-3 w-full">
+                            {ingredientInput(index)}
+                        </div>
+                    )
+                })
+            }
+            <div className="flex justify-end sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
+                <button type="submit" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                    Create
+                </button>
+            </div>
+        </form>
+    )
+
+    function ingredientInput(index) {
+        let ingredientName = `ingredients[${index}][id]`;
+        let ingredientQty = `ingredients[${index}][qty]`;
+        return (
+            <div className="flex flex-row sm:inline-flex sm:items-center space-y-2 sm:space-y-0 sm:space-x-1">
+                <Select name={ingredientName} placeholder={"Select ingredient.."} options={selectOptions} />
+                <input name={ingredientQty} type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="qty.." aria-describedby="hs-inline-input-helper-text"/>
+            </div>
+        )
+    }
+
     return (
         <>
             <button data-hs-overlay="#new-salad" type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
@@ -75,28 +108,9 @@ export default function NewSalad(props: {}) {
                     </button>
                 </div>
                 <div className="p-4">
-                    <form className={"flex flex-col gap-2"} onSubmit={createSalad}>
-                        <div className="flex flex-col space-y-2 sm:space-y-0 sm:space-x-3 w-full">
-                            <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Salad Name:</label>
-                            <input type="text" name="name" id="inline-input-label-with-helper-text" style={{marginLeft: 0}} className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Salad name.." aria-describedby="hs-inline-input-helper-text"/>
-                        </div>
-
-                        <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Items:</label>
-                        {
-                            [0, 1, 2, 3, 4].map((index) => {
-                                return (
-                                    <div key={index} className="flex flex-col space-y-2 sm:space-y-0 sm:space-x-3 w-full">
-                                        {ingredientInput(index)}
-                                    </div>
-                                )
-                            })
-                        }
-                        <div className="flex justify-end sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
-                            <button type="submit" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                Create
-                            </button>
-                        </div>
-                    </form>
+                    {
+                        loading ? loadingIndicator : form
+                    }
                 </div>
             </div>
         </>

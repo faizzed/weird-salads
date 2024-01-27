@@ -23,7 +23,7 @@ export default function Select(props: {
     return (
         <>
             <div className="relative w-full">
-                <select data-hs-select={JSON.stringify(selectOptions)} name={props.name}>
+                <select data-hs-select={JSON.stringify(selectOptions)} name={props.name} className={"border-gray-200 rounded-md w-full"}>
                     <option value="">Choose</option>
                     {
                         props.options?.map((option, index) => {
