@@ -16,13 +16,13 @@
   <body>
   <div class="flex flex-col gap-5">
     <div class="header">
-      <%= react_component("layout/Navbar", @props) %>
+      <%= react_component("layout/navbar", @data) %>
     </div>
-    <div>
+    <div class="page-padding">
       <%= yield %>
     </div>
     <div class="footer">
-      <%= react_component("layout/Footer", @props) %>
+      <%= react_component("layout/footer", @data) %>
     </div>
   </div>
   </body>
