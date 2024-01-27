@@ -1,6 +1,7 @@
 import React from "react"
 import Salad from "../../models/salad";
 import {Api} from "../common/api";
+import {toast, Toaster} from "react-hot-toast";
 
 type TableProps = {
     salads: Salad[]
@@ -12,18 +13,21 @@ export default function SaladsTable(props: TableProps) {
     async function sellSalad(salad: Salad) {
         await Api.createOrder(salad).then((response) => {
             if (response.error) {
-                alert(response.error);
+                toast.error(response.error)
                 return;
             }
 
-            alert("Salad sold!");
+            toast.success("Order created!");
 
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         });
     }
 
     return (
         <>
+            <div><Toaster/></div>
             <div className="flex flex-col">
                 <div className="-m-1.5 overflow-x-auto">
                     <div className="p-1.5 min-w-full inline-block align-middle">
