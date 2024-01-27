@@ -14,22 +14,17 @@ class IngredientsController < ApplicationController
     })
   end
 
-  def list_ingredients
+  def list_options
     render json: {
       ingredients: Ingredient.all.map(&:serializable_hash)
     }
   end
 
-  def show
-    @data.merge!({
-      title: "Weird Salads - Ingredients",
-      ingredient: Ingredient.find(params[:id])
-    })
-  end
-
   def create
     ingredient = Ingredient.create!(name: params[:name], quantity: params[:quantity], price: params[:price])
     render json: ingredient
+  rescue StandardError => e
+    render json: { error: e.message }, status: 422
   end
 
   def update

@@ -8,10 +8,20 @@ export class CreateSaladRequest {
     }
 }
 
+export class CreateIngredientRequest {
+    constructor(
+        public name: string,
+        public quantity: number,
+        public price: number,
+    ) {
+    }
+
+}
+
 export class Api {
 
     static async getIngredients(): Promise<Ingredient[]> {
-        const response = await fetch('/api/ingredients');
+        const response = await fetch('/api/ingredients/list');
         const data = await response.json();
         return data.ingredients.map((ingredient: any) => {
             return new Ingredient(ingredient.id, ingredient.name, ingredient.quantity, ingredient.price);
@@ -33,6 +43,23 @@ export class Api {
                         quantity: ingredient.quantity,
                     };
                 }),
+            }),
+        }).then((response) => {
+            return response.json();
+        });
+    }
+
+    static async createIngredient(request: CreateIngredientRequest): Promise<any> {
+        return fetch('/api/ingredients', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+            },
+            body: JSON.stringify({
+                name: request.name,
+                quantity: request.quantity,
+                price: request.price,
             }),
         }).then((response) => {
             return response.json();

@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :create]
 
   scope :api do
-    get "ingredients", to: "ingredients#list_ingredients"
     post "salads", to: "salads#create"
+
+    post "ingredients", to: "ingredients#create"
+    put "ingredients/:id", to: "ingredients#update"
+    get "ingredients/list", to: "ingredients#list_options"
   end
 end

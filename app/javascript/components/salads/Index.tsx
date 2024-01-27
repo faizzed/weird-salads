@@ -5,7 +5,6 @@ import SaladsTable from "./salads-table";
 
 interface HomeProps {
     salads: any[],
-    ingredients: any[]
 }
 
 export default function Home(props: HomeProps) {
