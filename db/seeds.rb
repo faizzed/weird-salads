@@ -1,7 +1,29 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+tables_empty = Salad.count == 0 && Ingredient.count == 0
+
+unless tables_empty
+  puts "Database already seeded"
+  exit
+end
+
+10.times do
+  Salad.create(name: Faker::Food.dish)
+end
+
+puts "Created salads"
+
+100.times do
+  Ingredient.create(name: Faker::Food.ingredient, quantity: Faker::Number.decimal(l_digits: 2), price: Faker::Number.decimal(l_digits: 2))
+end
+
+puts "Created ingredients"
+
+
+# for every salad add the first 10 ingredients with random quantities
+Salad.all.each do |salad|
+  Ingredient.all.sample(10).each do |ingredient|
+    salad.ingredients << ingredient
+    salad.salad_ingredients.find_by(ingredient: ingredient).update(quantity: Faker::Number.decimal(l_digits: 2))
+  end
+end
+
+puts "Added ingredients to salads"
