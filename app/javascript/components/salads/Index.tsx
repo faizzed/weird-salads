@@ -19,7 +19,7 @@ export default function Home(props: HomeProps) {
             </div>
             <div>
                 <SaladsTable
-                    headers={["Name", "Price", "Action"]}
+                    headers={["Name", "Price ($)", "Action"]}
                     salads={salads}
                 />
             </div>
