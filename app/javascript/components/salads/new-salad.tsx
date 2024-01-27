@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import Select, {SelectOption} from "../common/select";
-import {Api, CreateSaladRequest} from "../common/api";
+import {Api, SaladApiRequest} from "../common/api";
 import Ingredient from "../../models/ingredient";
 
 export default function NewSalad(props: {}) {
@@ -27,7 +27,7 @@ export default function NewSalad(props: {}) {
     async function createSalad(event) {
         event.preventDefault();
         let data = new FormData(event.target);
-        let createSaladRequest = new CreateSaladRequest(data.get("name").toString(), [])
+        let createSaladRequest = new SaladApiRequest(data.get("name").toString(), [])
         for (let i = 0; i < 5; i++) {
             let ingredientId = data.get(`ingredients[${i}][id]`);
             let ingredientQty = data.get(`ingredients[${i}][qty]`);

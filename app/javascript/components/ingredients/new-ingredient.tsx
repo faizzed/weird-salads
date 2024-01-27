@@ -1,12 +1,12 @@
 import React from 'react'
-import {Api, CreateIngredientRequest} from "../common/api";
+import {Api, IngredientApiRequest} from "../common/api";
 
 export default function NewIngredient(props: {}) {
 
     async function createIngredient(event) {
         event.preventDefault();
         let data = new FormData(event.target);
-        let createIngredientRequest = new CreateIngredientRequest(data.get("name").toString(), parseInt(data.get("quantity").toString()), parseInt(data.get("price").toString()))
+        let createIngredientRequest = new IngredientApiRequest(data.get("name").toString(), parseInt(data.get("quantity").toString()), parseInt(data.get("price").toString()))
         await Api.createIngredient(createIngredientRequest).then((response) => {
             if (response.error) {
                 alert(response.error);
@@ -21,17 +21,17 @@ export default function NewIngredient(props: {}) {
 
     return (
         <>
-            <button data-hs-overlay="#new-salad" type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+            <button data-hs-overlay="#new-ingredient" type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                 <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 11 4-7"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8c.9 0 1.8-.7 2-1.6l1.7-7.4"/><path d="m9 11 1 9"/><path d="M4.5 15.5h15"/><path d="m15 11-1 9"/></svg>
                 New Ingredient
             </button>
 
-            <div id="new-salad" className="hs-overlay hs-overlay-open:translate-x-0 hidden translate-x-full fixed top-0 end-0 transition-all duration-300 transform h-full max-w-[50%] w-full w-full z-[80] bg-white border-s dark:bg-gray-800 dark:border-gray-700 hidden" tabIndex="-1">
+            <div id="new-ingredient" className="hs-overlay hs-overlay-open:translate-x-0 hidden translate-x-full fixed top-0 end-0 transition-all duration-300 transform h-full max-w-[50%] w-full w-full z-[80] bg-white border-s dark:bg-gray-800 dark:border-gray-700 hidden" tabIndex="-1">
                 <div className="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
                     <h3 className="font-bold text-gray-800 dark:text-white">
                         Create new Ingredient!
                     </h3>
-                    <button type="button" className="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#new-salad">
+                    <button type="button" className="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#new-ingredient">
                         <span className="sr-only">Close modal</span>
                         <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                     </button>

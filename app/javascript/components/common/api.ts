@@ -1,7 +1,7 @@
 import Ingredient from "../../models/ingredient";
 import Salad from "../../models/salad";
 
-export class CreateSaladRequest {
+export class SaladApiRequest {
     constructor(
         public name: string,
         public ingredients: Ingredient[],
@@ -9,11 +9,12 @@ export class CreateSaladRequest {
     }
 }
 
-export class CreateIngredientRequest {
+export class IngredientApiRequest {
     constructor(
         public name: string,
         public quantity: number,
         public price: number,
+        public id?: number,
     ) {
     }
 
@@ -29,7 +30,7 @@ export class Api {
         });
     }
 
-    static async createSalad(saladRequest: CreateSaladRequest): Promise<any> {
+    static async createSalad(saladRequest: SaladApiRequest): Promise<any> {
         return fetch('/api/salads', {
             method: 'POST',
             headers: {
@@ -50,7 +51,7 @@ export class Api {
         });
     }
 
-    static async createIngredient(request: CreateIngredientRequest): Promise<any> {
+    static async createIngredient(request: IngredientApiRequest): Promise<any> {
         return fetch('/api/ingredients', {
             method: 'POST',
             headers: {
@@ -67,7 +68,7 @@ export class Api {
         });
     }
 
-    static async updateIngredient(ingredient: Ingredient): Promise<any> {
+    static async updateIngredient(ingredient: IngredientApiRequest): Promise<any> {
         return fetch('/api/ingredients/' + ingredient.id, {
             method: 'PUT',
             headers: {
