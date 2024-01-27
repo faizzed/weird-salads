@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_27_092048) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_27_094821) do
   create_table "ingredients", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.float "quantity"
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "salad_id"
+    t.float "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["salad_id"], name: "index_orders_on_salad_id"
   end
 
   create_table "salad_ingredients", charset: "utf8mb4", force: :cascade do |t|
