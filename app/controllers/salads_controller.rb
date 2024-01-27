@@ -5,4 +5,9 @@ class SaladsController < ApplicationController
       appName: "Weird Salads",
     }
   end
+
+  def create
+    salad = Salad.create!(name: params[:name])
+    render json: salad
+  end
 end
