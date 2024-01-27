@@ -10,12 +10,19 @@ class IngredientsController < ApplicationController
 
   def index
     @data.merge!({
-      ingredients: Ingredient.all
+      ingredients: Ingredient.all.map(&:serializable_hash)
     })
+  end
+
+  def list_ingredients
+    render json: {
+      ingredients: Ingredient.all.map(&:serializable_hash)
+    }
   end
 
   def show
     @data.merge!({
+      title: "Weird Salads - Ingredients",
       ingredient: Ingredient.find(params[:id])
     })
   end

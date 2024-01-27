@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   resources :salads, only: [:index, :create]
   resources :ingredients, only: [:index, :create, :update]
   resources :orders, only: [:index, :create]
+
+  scope :api do
+    get "ingredients", to: "ingredients#list_ingredients"
+  end
 end

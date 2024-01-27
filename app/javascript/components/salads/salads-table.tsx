@@ -35,7 +35,7 @@ export default function SaladsTable(props: TableProps) {
                                     {
                                         props.salads.map((salad, index) => {
                                             return (
-                                                <tr>
+                                                <tr key={index}>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{salad.name}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{salad.priceInDollars}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
