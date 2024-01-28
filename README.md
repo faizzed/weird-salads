@@ -47,3 +47,11 @@
 https://elderly-stove-234.notion.site/Tech-Plan-02dba22bc3ca4552821f87f47a025770
 
 ### Demo Video:
+
+
+
+https://github.com/faizzed/weird-salads/assets/14324782/c2ee8f48-d79f-4520-b345-9823f8b21e33
+
+
+
+
