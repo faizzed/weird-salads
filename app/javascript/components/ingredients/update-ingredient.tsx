@@ -58,7 +58,7 @@ export default function UpdateIngredient(props: {
 
                         <div className="flex flex-col space-y-2 sm:space-y-0 sm:space-x-3 w-full">
                             <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Quantity:</label>
-                            <input type="number" onChange={(e) => {
+                            <input type="number" step={"0.01"} onChange={(e) => {
                                 setIngredient({
                                     ...ingredient,
                                     quantity: parseFloat(e.target.value) || ""
@@ -68,7 +68,7 @@ export default function UpdateIngredient(props: {
 
                         <div className="flex flex-col space-y-2 sm:space-y-0 sm:space-x-3 w-full">
                             <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Price:</label>
-                            <input type="number" onChange={(e) => {
+                            <input type="number" step={"0.01"} onChange={(e) => {
                                 setIngredient({
                                     ...ingredient,
                                     price: parseFloat(e.target.value) || ""

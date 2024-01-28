@@ -88,7 +88,7 @@ export default function NewSalad(props: {}) {
         return (
             <div className="flex flex-row sm:inline-flex sm:items-center space-y-2 sm:space-y-0 sm:space-x-1">
                 <Select name={ingredientName} placeholder={"Select ingredient.."} options={selectOptions} />
-                <input name={ingredientQty} type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="quantity.." aria-describedby="hs-inline-input-helper-text"/>
+                <input name={ingredientQty} type="number" step={"0.01"} id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="quantity.." aria-describedby="hs-inline-input-helper-text"/>
             </div>
         )
     }

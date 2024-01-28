@@ -47,12 +47,12 @@ export default function NewIngredient(props: {}) {
 
                         <div className="flex flex-col space-y-2 sm:space-y-0 sm:space-x-3 w-full">
                             <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Quantity:</label>
-                            <input type="number" name="quantity" id="inline-input-label-with-helper-text" style={{marginLeft: 0}} className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="quantity.." aria-describedby="hs-inline-input-helper-text"/>
+                            <input type="number" step={"0.01"} name="quantity" id="inline-input-label-with-helper-text" style={{marginLeft: 0}} className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="quantity.." aria-describedby="hs-inline-input-helper-text"/>
                         </div>
 
                         <div className="flex flex-col space-y-2 sm:space-y-0 sm:space-x-3 w-full">
                             <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Price:</label>
-                            <input type="number" name="price" id="inline-input-label-with-helper-text" style={{marginLeft: 0}} className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="price.." aria-describedby="hs-inline-input-helper-text"/>
+                            <input type="number" step={"0.01"} name="price" id="inline-input-label-with-helper-text" style={{marginLeft: 0}} className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="price.." aria-describedby="hs-inline-input-helper-text"/>
                         </div>
 
                         <div className="flex justify-end sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
