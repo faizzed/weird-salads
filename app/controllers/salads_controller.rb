@@ -29,6 +29,8 @@ class SaladsController < ApplicationController
     end
 
     render json: { success: true }, status: 200
+  rescue ActiveRecord::RecordNotUnique
+    render json: { error: "Ingredients or salad not unique." }, status: 422
   rescue StandardError
     render json: { error: "Something went wrong!" }, status: 422
   end

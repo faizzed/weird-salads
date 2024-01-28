@@ -15,7 +15,7 @@ export default function Home(props: OrderProps) {
         <div className={"flex flex-col gap-2"}>
             <div>
                 <OrdersTable
-                    headers={["Salad", "Price"]}
+                    headers={["Salad", "Ingredients", "Price ($)", "Order Date"]}
                     orders={orders}
                 />
             </div>

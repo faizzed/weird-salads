@@ -37,7 +37,9 @@ export default function OrdersTable(props: TableProps) {
                                             return (
                                                 <tr key={index}>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{order.salad.name}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{order.salad.ingredientsNames}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{order.price}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{order.orderDate}</td>
                                                 </tr>
                                             )
                                         })
