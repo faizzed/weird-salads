@@ -5,37 +5,45 @@
   ```bash
   git clone git@github.com:faizzed/weird-salads.git
   ```
-
-- Install rails dependencies
-  ```bash
-    bundle install
-  ```  
   
-- Install yarn dependencies
+- Go to project directory & run the app
   ```bash
-    yarn
-  ```
-  
-- Create database, migrations and seeds
-  ```bash
-    rails db:create
-    rails db:migrate
-    rails db:seed
-  ```
-- create the react js bundle
-    ```bash
-    ./bin/shakapacker
+    cd weird-salads && ./run.sh
     ```
 
-- run the rails server from project directory
+<details>
+    <summary>OR follow the following steps individually</summary>
+
+  - Install rails dependencies
+
+      ```bash
+        bundle install
+      ```  
+  
+  - Install yarn dependencies
     ```bash
-    rails s -p 3002
+      yarn
     ```
+  
+  - Create database, migrations and seeds
+    ```bash
+      rails db:create
+      rails db:migrate
+      rails db:seed
+    ```
+  - create the react js bundle
+      ```bash
+      ./bin/shakapacker
+      ```
+  
+  - run the rails server from project directory
+      ```bash
+      rails s -p 3002
+      ```
+</details>
 
-- The first time you might get database not found. Just hit "Create Database" and it should work.
-- 
 
-### Project Plan:
+### Please checkout this notion page for more info:
 https://elderly-stove-234.notion.site/Tech-Plan-02dba22bc3ca4552821f87f47a025770
 
 ### Demo Video:
