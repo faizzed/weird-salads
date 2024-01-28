@@ -1,6 +1,8 @@
 # Weird Salads
 
-### How to setup?
+Live site: https://salads.onrender.com/
+
+### How to setup locally?
 - Clone the repo
   ```bash
   git clone git@github.com:faizzed/weird-salads.git
