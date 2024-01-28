@@ -8,7 +8,7 @@ class CreateOrder
     @salad.salad_ingredients.each do |salad_ingredient|
       ingredient = salad_ingredient.ingredient
       if ingredient.quantity < salad_ingredient.quantity
-        raise "Not enough ingredients"
+        raise NotEnoughIngredientsException
       end
     end
 
