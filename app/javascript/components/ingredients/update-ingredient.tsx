@@ -1,7 +1,7 @@
 import React from 'react'
 import {Api, IngredientApiRequest} from "../common/api";
 import Ingredient from "../../models/ingredient";
-import {toast, Toaster} from "react-hot-toast";
+import {toast} from "react-hot-toast";
 
 export default function UpdateIngredient(props: {
     ingredient: Ingredient,
@@ -34,7 +34,6 @@ export default function UpdateIngredient(props: {
 
     return (
         <>
-            <Toaster/>
             <div id={`update-ingredient-${props.index}`} className="hs-overlay hs-overlay-open:translate-x-0 hidden translate-x-full fixed top-0 end-0 transition-all duration-300 transform h-full max-w-[50%] w-full w-full z-[80] bg-white border-s dark:bg-gray-800 dark:border-gray-700 hidden" tabIndex="-1">
                 <div className="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
                     <h3 className="font-bold text-gray-800 dark:text-white">

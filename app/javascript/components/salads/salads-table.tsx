@@ -1,7 +1,7 @@
 import React from "react"
 import Salad from "../../models/salad";
 import {Api} from "../common/api";
-import {toast, Toaster} from "react-hot-toast";
+import {toast} from "react-hot-toast";
 
 type TableProps = {
     salads: Salad[]
@@ -27,7 +27,6 @@ export default function SaladsTable(props: TableProps) {
 
     return (
         <>
-            <div><Toaster/></div>
             <div className="flex flex-col">
                 <div className="-m-1.5 overflow-x-auto">
                     <div className="p-1.5 min-w-full inline-block align-middle">
@@ -56,7 +55,7 @@ export default function SaladsTable(props: TableProps) {
                                             return (
                                                 <tr key={index}>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{salad.name}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{salad.priceInDollars}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{salad.priceHR}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                         <button type="button" onClick={() => {
                                                             sellSalad(salad)

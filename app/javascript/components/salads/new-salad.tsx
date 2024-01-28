@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import Select, {SelectOption} from "../common/select";
 import {Api, SaladApiRequest} from "../common/api";
 import Ingredient from "../../models/ingredient";
-import {toast, Toaster} from "react-hot-toast";
+import {toast} from "react-hot-toast";
 
 export default function NewSalad(props: {}) {
 
@@ -39,7 +39,6 @@ export default function NewSalad(props: {}) {
 
         await Api.createSalad(createSaladRequest).then((response) => {
             if (response.error) {
-                alert(response.error);
                 toast.error(response.error);
                 return;
             }
@@ -65,7 +64,7 @@ export default function NewSalad(props: {}) {
                 <input type="text" name="name" id="inline-input-label-with-helper-text" style={{marginLeft: 0}} className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Salad name.." aria-describedby="hs-inline-input-helper-text"/>
             </div>
 
-            <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Items:</label>
+            <label htmlFor="input-label" className="block text-sm font-medium mb-2 dark:text-white">Ingredients (upto 5):</label>
             {
                 [0, 1, 2, 3, 4].map((index) => {
                     return (
@@ -77,7 +76,7 @@ export default function NewSalad(props: {}) {
             }
             <div className="flex justify-end sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
                 <button type="submit" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                    Create
+                    Create Salad
                 </button>
             </div>
         </form>
@@ -89,14 +88,13 @@ export default function NewSalad(props: {}) {
         return (
             <div className="flex flex-row sm:inline-flex sm:items-center space-y-2 sm:space-y-0 sm:space-x-1">
                 <Select name={ingredientName} placeholder={"Select ingredient.."} options={selectOptions} />
-                <input name={ingredientQty} type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="qty.." aria-describedby="hs-inline-input-helper-text"/>
+                <input name={ingredientQty} type="number" id="inline-input-label-with-helper-text" className="py-3 px-4 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="quantity.." aria-describedby="hs-inline-input-helper-text"/>
             </div>
         )
     }
 
     return (
         <>
-            <Toaster />
             <button data-hs-overlay="#new-salad" type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                 <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 11 4-7"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8c.9 0 1.8-.7 2-1.6l1.7-7.4"/><path d="m9 11 1 9"/><path d="M4.5 15.5h15"/><path d="m15 11-1 9"/></svg>
                 New Salad

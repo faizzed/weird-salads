@@ -1,6 +1,6 @@
 import React from 'react'
 import {Api, IngredientApiRequest} from "../common/api";
-import {toast, Toaster} from "react-hot-toast";
+import {toast} from "react-hot-toast";
 
 export default function NewIngredient(props: {}) {
 
@@ -23,7 +23,6 @@ export default function NewIngredient(props: {}) {
 
     return (
         <>
-            <Toaster/>
             <button data-hs-overlay="#new-ingredient" type="button" className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                 <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 11 4-7"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8c.9 0 1.8-.7 2-1.6l1.7-7.4"/><path d="m9 11 1 9"/><path d="M4.5 15.5h15"/><path d="m15 11-1 9"/></svg>
                 New Ingredient

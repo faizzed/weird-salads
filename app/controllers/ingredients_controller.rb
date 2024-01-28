@@ -23,16 +23,16 @@ class IngredientsController < ApplicationController
   def create
     ingredient = Ingredient.create!(name: params[:name], quantity: params[:quantity], price: params[:price])
     render json: ingredient
-  rescue StandardError => e
-    render json: { error: e.message }, status: 422
+  rescue StandardError
+    render json: { error: "Something went wrong!" }, status: 422
   end
 
   def update
     ingredient = Ingredient.find(params[:id])
     ingredient.update!(name: params[:name], quantity: params[:quantity], price: params[:price])
     render json: ingredient
-  rescue StandardError => e
-    render json: { error: e.message }, status: 422
+  rescue StandardError
+    render json: { error: "Something went wrong!" }, status: 422
   end
 
 end

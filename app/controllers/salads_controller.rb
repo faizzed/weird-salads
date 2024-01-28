@@ -29,8 +29,8 @@ class SaladsController < ApplicationController
     end
 
     render json: { success: true }, status: 200
-  rescue StandardError => e
-    render json: { error: e.message }, status: 422
+  rescue StandardError
+    render json: { error: "Something went wrong!" }, status: 422
   end
 
 end

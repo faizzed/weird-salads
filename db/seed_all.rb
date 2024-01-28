@@ -5,13 +5,13 @@ unless tables_empty
   exit
 end
 
-1.times do
+3.times do
   Salad.create(name: Faker::Food.dish)
 end
 
 puts "Created salads"
 
-5.times do
+15.times do
   Ingredient.create(name: Faker::Food.ingredient, quantity: Faker::Number.decimal(l_digits: 2), price: Faker::Number.decimal(l_digits: 2))
 end
 
@@ -26,7 +26,7 @@ end
 
 puts "Added ingredients to salads"
 
-1.times do
+2.times do
   Order.create(salad: Salad.all.sample, price: Faker::Number.decimal(l_digits: 2))
 end
 

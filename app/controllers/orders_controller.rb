@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
       CreateOrder.new(salad: Salad.find(params[:salad][:id])).execute
 
       render json: { message: "Order created" }
-    rescue StandardError => e
-      render json: { error: e.message }, status: 422
+    rescue StandardError
+      render json: { error: "Something went wrong!" }, status: 422
     end
 end

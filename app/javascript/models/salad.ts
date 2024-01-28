@@ -13,7 +13,7 @@ export default class Salad {
         );
     }
 
-    get priceInDollars(): string {
-        return (this.price / 100).toFixed(2);
+    get priceHR(): string {
+        return this.price.toFixed(2);
     }
 }
