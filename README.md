@@ -50,7 +50,7 @@ Please checkout the following sections for some of the ideation i did before sta
 
 <details>
     <summary>App idea:</summary>
-    Things highlighted in red aren't covered in the app. Rationale being they are additive and can be added to the app once the core features are built.
+    Items in italic format aren't covered in the app. Rationale being they are additive and can be added to the app once the core features are built.
 
 Main functions:
 
@@ -58,34 +58,34 @@ Main functions:
 - It can make up recipes and menus.
 - It should sell recipes.
 - It should track sales, costs, inventory movements etc.
-- <p style="color: red">It can handle location based recipes, inventory and staff</p>
+- *It can handle location based recipes, inventory and staff*
 
 Jobs:
 
 - On delivery:
     - Staff can track items
-    - <p style="color: red">Can add delivery date</p>
+    - *Can add delivery date*
     - Can cost items
 - Inventory check:
     - Staff can update items.
     - Update items quantity on wastage.
     - Remove items if needed.
-    - <p style="color: red">App should track changes (who, when and how much)</p>
+    - *App should track changes (who, when and how much)*
 - Menu makeup:
     - Staff can setup a menu.
     - Can create  salads.
     - Setup ingredients per salad.
-  - <p style="color: red">number of ingredients and their quantity along with unit of measurement can be added or removed — i.e dynamic form for handling this</p>
+  - *number of ingredients and their quantity along with unit of measurement can be added or removed — i.e dynamic form for handling this*
     - Add cost of salad.
 - Selling:
     - Staff can sell salad.
     - It should check if the salad ingredients are available and adjust inventory accordingly after sale.
     - Store sale data.
 - Manager:
-    - <p style="color: red">Manager can check monthly sales.</p>
-    - <p style="color: red">costs</p>
-    - <p style="color: red">wastage</p>
-    - <p style="color: red">etc..</p>
+    - *Manager can check monthly sales.*
+    - *costs*
+    - *wastage*
+    - *etc..*
 </details>
 
 <details>
